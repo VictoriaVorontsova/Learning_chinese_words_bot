@@ -384,10 +384,4 @@ def callback_query(call):
                          'Shall we go on? /learn or /practice')
 
 
-@bot.message_handler(content_types=['text'])
-def lerned(message):
-    if message.text == "Что я знаю?":
-        bot.send_message(message.from_user.id, f"{list_of_verbs_learned}")
-
-
 bot.polling(none_stop=True)
