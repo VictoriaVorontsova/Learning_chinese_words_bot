@@ -3,11 +3,11 @@ from random import choice
 import telebot
 from telebot import types
 
-bot = telebot.TeleBot('TOKEN')
+bot = telebot.TeleBot('5565728031:AAHR0lz4D16dj47t66dMR_hmFihMu6Y7e74')
 
 v1 = ['零', 'líng', 'zero']
 v2 = ['一', 'yī', 'one']
-v3 = ['二', 'èr', 'two']
+v3 = ['二', 'èr', 'two (for nummbers)']
 v4 = ['三', 'sān', 'three']
 v5 = ['四', 'sì', 'four']
 v6 = ['五', 'wǔ', 'five']
@@ -16,7 +16,7 @@ v8 = ['七', 'qī', 'seven']
 v9 = ['八', 'bā', 'eight']
 v10 = ['九', 'jiǔ', 'nine']
 v11 = ['十', 'shí', 'ten']
-v12 = ['两', 'liǎng', 'two']
+v12 = ['两', 'liǎng', 'two (for measure words)']
 v13 = ['百', 'bǎi', 'hundred']
 v14 = ['千', 'qiān', 'thousand']
 v15 = ['第一', 'dì-yī', 'first']
@@ -33,8 +33,8 @@ v25 = ['那/那儿', 'nà/nàr', 'that/there']
 v26 = ['哪/哪儿', 'nǎ/nǎr', 'which/where']
 v27 = ['谁', 'shéi', 'who']
 v28 = ['什么', 'shénme', 'what']
-v29 = ['多少', 'duōshao', 'how many or how much']
-v30 = ['几', 'jǐ', 'how many or how much']
+v29 = ['多少', 'duōshao', 'how many or how much (any number)']
+v30 = ['几', 'jǐ', 'how many or how much (number less than 10)']
 v31 = ['怎么', 'zěnme', 'how']
 v32 = ['怎么样', 'zěnmeyàng', 'how about']
 v33 = ['为什么', 'wèi shénme', 'why']
@@ -267,8 +267,8 @@ v259 = ['很', 'hěn', 'very']
 v260 = ['非常', 'fēicháng', 'extremely']
 v261 = ['太', 'tài', 'too…']
 v262 = ['都', 'dōu', 'both or all']
-v263 = ['不', 'bù', 'not']
-v264 = ['没', 'méi', 'not']
+v263 = ['不', 'bù', "not (to negate an action that you don't want to do)"]
+v264 = ['没', 'méi', 'not (talking about the past)']
 v265 = ['每', 'měi', 'every']
 v266 = ['最', 'zuì', 'most']
 v267 = ['真', 'zhēn', 'really']
@@ -288,12 +288,14 @@ v280 = ['离 ', 'lí', 'away from']
 v281 = ['比', 'bǐ', 'than']
 v282 = ['的', 'de', 'possession particle']
 v283 = ['得', 'de', 'structure particle']
-v284 = ['了', 'le', 'aspect particle']
-v285 = ['着', 'zhe', 'aspect particle']
-v286 = ['过', 'guò', 'aspect particle']
-v287 = ['吗', 'ma', 'question particle']
-v288 = ['呢', 'ne', 'question particle']
-v289 = ['吧', 'ba', 'question particle']
+v284 = ['了', 'le', 'aspect particle (indicates that the event was completed)']
+v285 = ['着', 'zhe',
+        'aspect particle ( is used after the verb to express that the action is ongoing)']
+v286 = ['过', 'guò',
+        'aspect particle (focuses on event having been experienced)']
+v287 = ['吗', 'ma', 'question particle (yes-no)']
+v288 = ['呢', 'ne', 'question particle (for softening)']
+v289 = ['吧', 'ba', 'question particle (for agreement or confirmation)']
 v290 = ['和', 'hé', 'and']
 v291 = ['但是', 'dànshì', 'but']
 v292 = ['因为', 'yīnwèi', 'because']
@@ -382,6 +384,12 @@ def callback_query(call):
     except ValueError or IndexError:
         bot.send_message(call.message.chat.id,
                          'Shall we go on? /learn or /practice')
+
+
+@bot.message_handler(content_types=['text'])
+def lerned(message):
+    if message.text == "Что я знаю?":
+        bot.send_message(message.from_user.id, f"{list_of_verbs_learned}")
 
 
 bot.polling(none_stop=True)
